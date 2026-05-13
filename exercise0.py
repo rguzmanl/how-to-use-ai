@@ -13,8 +13,13 @@ import numpy
 # and look for an AI-generated suggestion to complete the function.
 # Click Tab to accept the suggestion.
 
+def compute_mean_v1(numbers):
+    return sum(numbers) / len(numbers)
 
-
+def compute_stddev_v1(numbers):
+    mean = compute_mean_v1(numbers)
+    variance = sum((x - mean) ** 2 for x in numbers) / len(numbers)
+    return math.sqrt(variance)
 
 
 # If no suggestion to compute the standard deviation appears,
@@ -33,7 +38,25 @@ import numpy
 # Click "Send" to get the chatbot's response.
 
 
+def compute_mean_v2(numbers):
+    total = 0
+    for num in numbers:
+        total += num
+    return total / len(numbers)
 
+# def compute_stddev_v2(numbers):
+#     mean = compute_mean_v2(numbers)
+#     squared_diffs = [(x - mean) ** 2 for x in numbers]
+#     variance = sum(squared_diffs) / len(numbers)
+#     return math.sqrt(variance)
+
+def compute_stddev_v2(numbers):
+    mean = compute_mean_v2(numbers)
+    squared_diffs = []
+    for x in numbers:
+        squared_diffs.append((x - mean) ** 2)
+    variance = sum(squared_diffs) / len(numbers)
+    return math.sqrt(variance)
 
 
 # Third, type the same instructions to the chatbot:
@@ -44,7 +67,18 @@ import numpy
 # LLMs are a model with stochastic elements, 
 # so you may get different responses each time.
 
+def compute_mean_v3(numbers):
+    count = len(numbers)
+    total = sum(numbers)
+    mean = total / count
+    return mean
 
+def compute_stddev_v3(numbers):
+    mean = compute_mean_v3(numbers)
+    squared_diffs = [(num - mean) ** 2 for num in numbers]
+    variance = sum(squared_diffs) / len(numbers)
+    stddev = math.sqrt(variance)
+    return stddev
 
 
 
@@ -56,7 +90,15 @@ import numpy
 # Name these functions compute_mean_v4 and compute_stddev_v4."
 # Click "Send" to get the chatbot's response.
 
+def compute_mean_v4(numbers):
+    arr = numpy.array(numbers)
+    return arr.sum() / arr.size
 
+def compute_stddev_v4(numbers):
+    arr = numpy.array(numbers)
+    mean = arr.sum() / arr.size
+    variance = ((arr - mean) ** 2).sum() / arr.size
+    return numpy.sqrt(variance)
 
 
 
@@ -72,7 +114,25 @@ import numpy
 # so you may get different responses from each.
 
 
+def compute_mean_v5(numbers):
+    # Calculate the mean using a for loop and manual counting
+    total = 0
+    count = 0
+    for num in numbers:
+        total += num
+        count += 1
+    return total / count
 
+def compute_stddev_v5(numbers):
+    # Calculate the standard deviation using the mean from compute_mean_v5
+    mean = compute_mean_v5(numbers)
+    squared_diffs = 0
+    count = 0
+    for num in numbers:
+        squared_diffs += (num - mean) ** 2
+        count += 1
+    variance = squared_diffs / count
+    return math.sqrt(variance)
 
 
 
@@ -89,7 +149,45 @@ import numpy
 # LLMs typically provide longer responses if your instruction is more detailed.
 # Roughly, the number of words are referred to as "tokens" in LLM terminology. 
 
+def compute_mean_v6(numbers):
+    # The mean is the average value of a list of numbers.
+    # To calculate the mean:
+    # 1. Add up all the numbers.
+    total = 0  # This will store the sum of the numbers
+    for num in numbers:
+        total += num  # Add each number to the total
 
+    # 2. Count how many numbers there are.
+    count = len(numbers)  # len() gives the number of items in the list
+
+    # 3. Divide the total by the count to get the mean.
+    mean = total / count
+
+    # 4. Return the mean value.
+    return mean
+
+def compute_stddev_v6(numbers):
+    # The standard deviation measures how spread out the numbers are from the mean.
+    # Steps to calculate standard deviation:
+
+    # 1. First, calculate the mean (average) of the numbers.
+    mean = compute_mean_v6(numbers)
+
+    # 2. For each number, find the difference from the mean, then square it.
+    squared_diffs = []  # This will store the squared differences
+    for num in numbers:
+        diff = num - mean  # Difference from the mean
+        squared = diff ** 2  # Square the difference
+        squared_diffs.append(squared)  # Add to the list
+
+    # 3. Find the average of these squared differences (this is the variance).
+    variance = sum(squared_diffs) / len(numbers)
+
+    # 4. The standard deviation is the square root of the variance.
+    stddev = math.sqrt(variance)
+
+    # 5. Return the standard deviation value.
+    return stddev
 
 
 

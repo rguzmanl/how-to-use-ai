@@ -21,6 +21,16 @@ from math import comb, isqrt
 from typing import List
 
 def fibonacci(n):
+    """
+    Calculate the n-th Fibonacci number.
+    Args:
+        n (int): The position in the Fibonacci sequence (must be non-negative).
+    Returns:
+        int: The n-th Fibonacci number.
+    Raises:
+        ValueError: If n is negative.
+    """
+
     if n < 0:
         raise ValueError("n must be non-negative")
     a, b = 0, 1
@@ -47,3 +57,27 @@ def first_ten_primes():
             primes.append(candidate)
         candidate += 1
     return primes
+
+
+def binomial_coefficient(n, k): 
+    """
+    Calculate the binomial coefficient "n choose k".
+    Args:
+        n (int): The total number of items.
+        k (int): The number of items to choose.
+    Returns:
+        int: The binomial coefficient C(n, k).
+    Raises:
+        ValueError: If n or k are negative, or if k > n.
+    """
+    if n < 0 or k < 0 or k > n:
+        raise ValueError("Invalid values for n and k")
+    return comb(n, k)   
+
+
+if __name__ == "__main__":
+    # Example usages
+    print("Fibonacci of 10:", fibonacci(10))  # Output: 55
+    print("Is 29 prime?:", is_prime(29))      # Output: True
+    print("First ten primes:", first_ten_primes())  # Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+    print("Binomial coefficient C(5, 2):", binomial_coefficient(5, 2))  # Output: 10
